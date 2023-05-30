@@ -77,7 +77,7 @@ public class internal_pacientes_view extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("ADMINISTRAR PACIENTES");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
 
@@ -229,50 +229,57 @@ public class internal_pacientes_view extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
-        /*if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty() || txt_cedula.getText().isEmpty()) {
+        if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty() || txt_cedula.getText().isEmpty()
+                || txt_direccion.getText().isEmpty() || txt_telefono.getText().isEmpty() || txt_ocupacion.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Campos obligatorios..");
-        } else {
-            Cliente cliente = new Cliente();
-            CTR_Cliente controlcliente = new CTR_Cliente();
 
-            cliente.setNombre(txt_nombre.getText().trim());
-            cliente.setApellido(txt_apellido.getText().trim());
-            cliente.setCedula(Integer.parseInt(txt_cedula.getText()));
-            cliente.setTelefono(txt_telefono.getText().trim());
-            cliente.setDireccion(txt_direccion.getText().trim());
-            cliente.setCorreo(txt_correo.getText().trim());
+        } else if(!jComboBox1.getSelectedItem().equals("Seleccione ciudad:") || !jComboBox_estadocivil.getSelectedItem().equals("Seleccione Estado Civil:")) {
+            Pacientes pacientes = new Pacientes();
+            control_pacientes controlpacientes = new control_pacientes();
 
-            if (controlcliente.actualizar(cliente, idClientes)) {
-                JOptionPane.showMessageDialog(null, "Registro Guardado..");
+            pacientes.setNombre(txt_nombre.getText().trim());
+            pacientes.setApellido(txt_apellido.getText().trim());
+            pacientes.setCedula(txt_cedula.getText());
+            pacientes.setTelefono(txt_telefono.getText().trim());
+            pacientes.setDireccion(txt_direccion.getText().trim());
+            pacientes.setCorreo(txt_correo.getText().trim());
+            pacientes.setOcupacion(txt_ocupacion.getText().trim());
+            this.idciudades();
+            pacientes.setIdciudad(this.obteneridciudadcombo);
+            pacientes.setEstado_civil(jComboBox_estadocivil.getSelectedItem().toString());
+            
+
+            if (controlpacientes.actualizar(pacientes, idpacientes)) {
+                JOptionPane.showMessageDialog(null, "Registro Guardado");
                 this.deshabilitar_botones();
                 this.LimpiarCampos();
                 this.deshabilitarcampos();
-                this.CargarTablaClientes();
+                this.CargarTablaPacientes();
             } else {
 
                 JOptionPane.showMessageDialog(null, "Error al guardar");
 
             }
 
-        }*/
+        }
     }//GEN-LAST:event_btn_actualizarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-        /* int respuesta = JOptionPane.showConfirmDialog(this, "Estas seguro de eliminar el registro?", "Confirm", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
+        int respuesta = JOptionPane.showConfirmDialog(this, "Estas seguro de eliminar el registro?", "Confirm", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-            Cliente cliente = new Cliente();
-            CTR_Cliente controlcliente = new CTR_Cliente();
+            Pacientes pacientes = new Pacientes();
+            control_pacientes controlpacientes = new control_pacientes();
 
-            if (idClientes == 0) {
+            if (idpacientes == 0) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un cliente..");
 
             } else {
-                if (!controlcliente.eliminar(idClientes)) {
+                if (!controlpacientes.eliminar(idpacientes)) {
                     JOptionPane.showMessageDialog(null, "Eliminado");
                     this.deshabilitar_botones();
                     this.LimpiarCampos();
                     this.deshabilitarcampos();
-                    this.CargarTablaClientes();
+                    this.CargarTablaPacientes();
 
                 } else {
                 }
@@ -287,7 +294,7 @@ public class internal_pacientes_view extends javax.swing.JInternalFrame {
 
         }
 
-         */
+         
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
     private void txt_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_telefonoActionPerformed
@@ -472,6 +479,28 @@ public class internal_pacientes_view extends javax.swing.JInternalFrame {
             System.out.println("Error al obtener el id de categorias");
         }
         return descripcionciudad;
+    }
+    
+    
+    private int idciudades() {
+        
+       
+        String sql = "Select * from ciudades where descripcion = '" + this.jComboBox1.getSelectedItem() + "'";
+        Statement st;
+        try {
+            Connection cn = (Connection) conexion.conectar();
+            st = (Statement) cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                obteneridciudadcombo = rs.getInt("idciudades");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al obtener id categorias");
+        }
+        return obteneridciudadcombo;
+        
     }
     
     public void cargarcomboboxciudades() {

@@ -12,12 +12,10 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import modelo.Pacientes;
 
-
-
 public class internal_pacientes extends javax.swing.JInternalFrame {
 
-    
     int obteneridciudadcombo = 0;
+
     public internal_pacientes() {
         initComponents();
         this.setSize(new Dimension(860, 427));
@@ -214,35 +212,42 @@ public class internal_pacientes extends javax.swing.JInternalFrame {
         Pacientes pacientes = new Pacientes();
 
         if (!txtnombre.getText().isEmpty() || !txtapellido.getText().isEmpty() || !txtcedula.getText().isEmpty()) {
-                
-                
-                pacientes.setNombre(txtnombre.getText().trim());
-                pacientes.setApellido(txtapellido.getText().trim());
-                pacientes.setCedula(txtcedula.getText().trim());
-                pacientes.setDireccion(txt_direccion.getText().trim());
-                pacientes.setTelefono(txt_telefono.getText().trim());
-                pacientes.setCorreo(txt_correo.getText().trim());
-                pacientes.setEstado_civil(jComboBox_estadocivil.getSelectedItem().toString().trim());
-                pacientes.setOcupacion(txt_ocupacion.getText().trim());
-                this.IdCiudades();
-                pacientes.setIdciudad(obteneridciudadcombo);
 
-                if(pacientesctr.guardar(pacientes)){
+            pacientes.setNombre(txtnombre.getText().trim());
+            pacientes.setApellido(txtapellido.getText().trim());
+            pacientes.setCedula(txtcedula.getText().trim());
+            pacientes.setDireccion(txt_direccion.getText().trim());
+            pacientes.setTelefono(txt_telefono.getText().trim());
+            pacientes.setCorreo(txt_correo.getText().trim());
+            pacientes.setEstado_civil(jComboBox_estadocivil.getSelectedItem().toString().trim());
+            pacientes.setOcupacion(txt_ocupacion.getText().trim());
+            this.IdCiudades();
+            pacientes.setIdciudad(obteneridciudadcombo);
+
+            if (!pacientesctr.existepaciente(txtcedula.getText().trim())) {
+
+                if (pacientesctr.guardar(pacientes)) {
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
                     this.LimpiarCampos();
                     this.txtnombre.requestFocus();
-                }else{
-                    JOptionPane.showMessageDialog(null, "No se pudo guardar el registro..");
-                    
-                }
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo guardar el registro");
 
-        } else {
+                }
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "Numero de C.I registrado");
+                this.txtcedula.requestFocus();
+            }
+            } 
+        
+        else {
 
             JOptionPane.showMessageDialog(null, "Campos obligatorios");
             this.txtnombre.requestFocus();
         }
 
-        this.LimpiarCampos();
+        
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void txt_correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_correoActionPerformed
@@ -299,9 +304,9 @@ public class internal_pacientes extends javax.swing.JInternalFrame {
         this.txt_correo.setText("");
         this.jComboBox1.setSelectedItem("Seleccione ciudad:");
         this.txt_ocupacion.setText("");
-        
+
     }
-    
+
     private void Cancelar() {
         this.txtnombre.setText("");
         this.txtapellido.setText("");
@@ -312,30 +317,29 @@ public class internal_pacientes extends javax.swing.JInternalFrame {
         this.txt_correo.setText("");
         this.jComboBox1.setSelectedItem("Seleccione ciudad:");
         this.txt_ocupacion.setText("");
-        
+
     }
-    
-    
+
     private void CargarComboBoxCiudades() {
         Connection con = (Connection) conexion.conexion.conectar();
         String sql = "SELECT * from ciudades";
-        Statement st;        
+        Statement st;
         try {
             st = (Statement) con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             jComboBox1.removeAllItems();
             jComboBox1.addItem("Seleccione ciudad:");
             while (rs.next()) {
-                jComboBox1.addItem(rs.getString("descripcion"));    
+                jComboBox1.addItem(rs.getString("descripcion"));
             }
             con.close();
         } catch (SQLException e) {
             System.out.println("Error al cargar categorias");
         }
     }
-private int IdCiudades() {
-        
-       
+
+    private int IdCiudades() {
+
         String sql = "Select * from ciudades where descripcion = '" + this.jComboBox1.getSelectedItem() + "'";
         Statement st;
         try {
@@ -351,8 +355,7 @@ private int IdCiudades() {
             System.out.println("Error");
         }
         return obteneridciudadcombo;
-        
+
     }
 
 }
-
