@@ -19,13 +19,14 @@ public class internal_consulta extends javax.swing.JInternalFrame {
 
     int obteneridpacientescombo = 0;
     String imprimir;
+    double valorusadoimc = 0.0;
 
     public internal_consulta() {
         initComponents();
-        this.setSize(new Dimension(783, 476));
+        this.setSize(new Dimension(875, 555));
         this.setTitle("FICHA PACIENTE");
         this.CargarComboBoxPacientes();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -35,7 +36,7 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         combobox_pacientes = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        SP_EDAD = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         peso = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -46,13 +47,13 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        altura = new javax.swing.JTextField();
+        txt_altura = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         imc = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txt_cia_muñeca = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -60,12 +61,12 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         jLabel20 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox_biotipo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txt_pesoideal = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txt_porcentaje_ppi = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
@@ -77,10 +78,14 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         jLabel26 = new javax.swing.JLabel();
         PACIENTESNUEVO = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
+        sexocombo = new javax.swing.JComboBox<>();
+        txt_valorac_nutricional = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
-        setPreferredSize(new java.awt.Dimension(783, 476));
+        setPreferredSize(new java.awt.Dimension(875, 555));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setText("Paciente:");
@@ -94,9 +99,9 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         });
         getContentPane().add(combobox_pacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 170, -1));
 
-        jLabel10.setText("Edad:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
-        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 90, -1));
+        jLabel10.setText("SEXO:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+        getContentPane().add(SP_EDAD, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 120, 90, -1));
 
         jLabel2.setText("Peso Actual:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
@@ -122,12 +127,12 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         jLabel11.setText("Estatura:");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
 
-        altura.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt_altura.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                alturaKeyPressed(evt);
+                txt_alturaKeyPressed(evt);
             }
         });
-        getContentPane().add(altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 70, -1));
+        getContentPane().add(txt_altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 70, -1));
 
         jLabel12.setText("cm");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
@@ -139,11 +144,22 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
 
         jLabel14.setText("%");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, -1, -1));
 
         jLabel15.setText("Cia Muñeca ");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 70, -1));
+
+        txt_cia_muñeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cia_muñecaActionPerformed(evt);
+            }
+        });
+        txt_cia_muñeca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_cia_muñecaKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txt_cia_muñeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 70, -1));
 
         jLabel16.setText("cm");
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
@@ -164,19 +180,21 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         jLabel21.setText("Biotipo:");
         getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione opcion:", "Ectomorfo", "Mesomorto", "Endomorfo" }));
-        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 130, -1));
+        jComboBox_biotipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione opcion:", "Pequeña", "Mediana", "Grande" }));
+        getContentPane().add(jComboBox_biotipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 130, -1));
 
         jLabel1.setText("Peso Ideal:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, -1, -1));
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 70, -1));
+
+        txt_pesoideal.setEnabled(false);
+        getContentPane().add(txt_pesoideal, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 70, -1));
 
         jLabel19.setText("kg");
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, -1, -1));
 
-        jLabel22.setText("% Peso Ideal:");
+        jLabel22.setText("PPI:");
         getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, -1));
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, -1, -1));
+        getContentPane().add(txt_porcentaje_ppi, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 110, -1));
 
         jLabel23.setText("Ant. Familiares:");
         getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
@@ -205,6 +223,17 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("CONSULTA");
         getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 290, -1));
+
+        PACIENTESNUEVO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PACIENTESNUEVOActionPerformed(evt);
+            }
+        });
+        PACIENTESNUEVO.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PACIENTESNUEVOKeyPressed(evt);
+            }
+        });
         getContentPane().add(PACIENTESNUEVO, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 130, -1));
 
         jButton3.setText("SEARCH");
@@ -215,13 +244,28 @@ public class internal_consulta extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, -1, -1));
 
+        jLabel27.setText("Edad:");
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, -1, -1));
+
+        sexocombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sexo:", "F", "M" }));
+        getContentPane().add(sexocombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, -1, -1));
+        getContentPane().add(txt_valorac_nutricional, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 240, -1));
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //this.idpacientes();
         this.calcularimc();
-      
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void combobox_pacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combobox_pacientesMouseClicked
@@ -229,27 +273,59 @@ public class internal_consulta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_combobox_pacientesMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       this.BUSCARPacientes();
-       this.combobox_pacientes.setEnabled(false);
+        this.BUSCARPacientes();
+        this.combobox_pacientes.setEnabled(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void alturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_alturaKeyPressed
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-                  this.calcularimc();
-                }
-    }//GEN-LAST:event_alturaKeyPressed
+    private void txt_alturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_alturaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.calcularimc();
+          this.calculartipodeobesidad();
+            System.out.println("el imc es: " + this.imc.getText());
+        }
+    }//GEN-LAST:event_txt_alturaKeyPressed
+
+    private void txt_cia_muñecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cia_muñecaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.calcularcontextura();
+            this.calcularpesoideal();
+            
+        }
+    }//GEN-LAST:event_txt_cia_muñecaKeyPressed
+
+    private void txt_cia_muñecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cia_muñecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cia_muñecaActionPerformed
+
+    private void PACIENTESNUEVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PACIENTESNUEVOActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PACIENTESNUEVOActionPerformed
+
+    private void PACIENTESNUEVOKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PACIENTESNUEVOKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.BUSCARPacientes();
+        this.combobox_pacientes.setEnabled(false);
+            
+        }
+    }//GEN-LAST:event_PACIENTESNUEVOKeyPressed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       TablaPorcentajeideal tablaporce = new TablaPorcentajeideal();
+       tablaporce.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField PACIENTESNUEVO;
-    private javax.swing.JTextField altura;
+    private javax.swing.JSpinner SP_EDAD;
     private javax.swing.JComboBox<String> combobox_pacientes;
     private javax.swing.JTextField imc;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox_biotipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -269,46 +345,45 @@ public class internal_consulta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField peso;
+    private javax.swing.JComboBox<String> sexocombo;
+    private javax.swing.JTextField txt_altura;
+    private javax.swing.JTextField txt_cia_muñeca;
+    private javax.swing.JTextField txt_pesoideal;
+    private javax.swing.JTextField txt_porcentaje_ppi;
+    private javax.swing.JTextField txt_valorac_nutricional;
     // End of variables declaration//GEN-END:variables
 
-    
-    private void LimpiarCampos(){
+    private void LimpiarCampos() {
         /*this.txtnombre.setText("");
         this.txtcantidad.setText("");
         this.txtprecio.setText("");
         this.txtdescripcion.setText("");
         this.txtnombre.requestFocus();*/
     }
-    
-    private void deshabilitarcampos(){
-        
+
+    private void deshabilitarcampos() {
+
     }
-    
-    
-    
 
     private void CargarComboBoxPacientes() {
         Connection con = (Connection) conexion.conectar();
         String sql = "SELECT idpacientes,nombre from pacientes";
         Statement st;
-        
+
         try {
             st = (Statement) con.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -316,7 +391,7 @@ public class internal_consulta extends javax.swing.JInternalFrame {
             combobox_pacientes.addItem("Seleccione paciente:");
 
             while (rs.next()) {
-                combobox_pacientes.addItem(rs.getString("nombre"));  
+                combobox_pacientes.addItem(rs.getString("nombre"));
             }
 
             con.close();
@@ -325,9 +400,9 @@ public class internal_consulta extends javax.swing.JInternalFrame {
             System.out.println("Error al cargar pacientes");
         }
     }
-  private int idpacientes() {
-        
-       
+
+    private int idpacientes() {
+
         String sql = "Select * from pacientes where nombre = '" + this.combobox_pacientes.getSelectedItem() + "'";
         Statement st;
         try {
@@ -345,20 +420,20 @@ public class internal_consulta extends javax.swing.JInternalFrame {
             System.out.println("Error al obtener id pacientes");
         }
         return obteneridpacientescombo;
-   
+
     }
-  
-  private void BUSCARPacientes() {
+
+    private void BUSCARPacientes() {
         Connection con = (Connection) conexion.conectar();
         String sql = "SELECT * from pacientes where cedula = '" + PACIENTESNUEVO.getText() + "'";
         Statement st;
-        
+
         try {
             st = (Statement) con.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                this.PACIENTESNUEVO.setText(rs.getString("nombre") + " " + rs.getString("apellido")); 
+                this.PACIENTESNUEVO.setText(rs.getString("nombre") + " " + rs.getString("apellido"));
                 obteneridpacientescombo = rs.getInt("idpacientes");
                 System.out.println(obteneridpacientescombo);
             }
@@ -369,29 +444,124 @@ public class internal_consulta extends javax.swing.JInternalFrame {
             System.out.println("Error al cargar pacientes");
         }
     }
-  
-  
-  public void calcularimc(){
-      double estatura = 0.0;
-      double pesovalor = 0.0;
-        double imcvalor = 0.0 ;
+
+    
+    public void calculartipodeobesidad(){
+        
        
-      estatura = Double.parseDouble(altura.getText());
-      pesovalor = Double.parseDouble(peso.getText());
-      
-      double valorneto = estatura * estatura;
-      
-      imcvalor = pesovalor / (estatura*estatura);
-      DecimalFormat df =new DecimalFormat("#.##");
-      
-      this.imc.setText((df.format(imcvalor)));
-      
-      System.out.println(estatura);
+            if (valorusadoimc < 18.50) {
+                this.txt_valorac_nutricional.setText("Peso Insuficiente".toUpperCase());
+            } 
+           else if (valorusadoimc >= 18.50 && valorusadoimc <= 24.90) {
+                this.txt_valorac_nutricional.setText("Normopeso".toUpperCase());
+
+            } else if (valorusadoimc >= 25.00 && valorusadoimc <= 29.90) {
+                this.txt_valorac_nutricional.setText("Sobrepeso".toUpperCase());
+
+            } else if (valorusadoimc >= 30.00 && valorusadoimc <= 34.90) {
+                this.txt_valorac_nutricional.setText("Obesidad Grado I".toUpperCase());
+            } else if (valorusadoimc >= 35.0 && valorusadoimc <= 39.90) {
+                this.txt_valorac_nutricional.setText("Obesidad Grado II".toUpperCase());
+            } else if (valorusadoimc > 40.00) {
+                this.txt_valorac_nutricional.setText("Obesidad Grado III".toUpperCase());
+
+            }  
+    }
+    
+    
+    
+    
+    
+    public void calcularimc() {
+        double estatura = 0.0;
+        double pesovalor = 0.0;
+        double imcvalor = 0.0;
+        estatura = Double.parseDouble(txt_altura.getText());
+        pesovalor = Double.parseDouble(peso.getText());
+
+        double valorneto = estatura * estatura;
+
+        imcvalor = pesovalor / (estatura * estatura);
+        valorusadoimc = imcvalor;
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        this.imc.setText((df.format(imcvalor)));
+
+            /*System.out.println(estatura);
       System.out.println(valorneto);
-      System.out.println(imcvalor);
-      
-      
-      
-  }
-  
+      System.out.println(imcvalor);**/
+        }
+
+    
+
+    public void calcularcontextura() {
+        double talla = 0.0;
+        double cia_muñeca = 0.0;
+        double biotipo = 0.0;
+        double multiplo = 100.0;
+
+        String impresion = "";
+
+        talla = Double.parseDouble(txt_altura.getText());
+        cia_muñeca = Double.parseDouble(txt_cia_muñeca.getText());
+
+        biotipo = (talla / (cia_muñeca)) * 100.0;
+
+        DecimalFormat dfor = new DecimalFormat("#.##");
+
+        if (this.sexocombo.getSelectedItem().equals("Sexo:")) {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR EL SEXO DEL PACIENTE");
+        } else {
+            if (this.sexocombo.getSelectedItem().equals("M")) {
+                if (biotipo > 10.40) {
+                    this.jComboBox_biotipo.setSelectedItem("Pequeña");
+                } else if (biotipo > 9.60 && biotipo < 10.40) {
+                    this.jComboBox_biotipo.setSelectedItem("Mediana");
+                } else if (biotipo < 9.60) {
+                    this.jComboBox_biotipo.setSelectedItem("Grande");
+                }
+            } else if (this.sexocombo.getSelectedItem().equals("F")) {
+                if (biotipo > 11) {
+                    this.jComboBox_biotipo.setSelectedItem("Pequeña");
+                } else if (biotipo > 10.10 && biotipo < 11) {
+                    this.jComboBox_biotipo.setSelectedItem("Mediana");
+                } else if (biotipo < 10.10) {
+                    this.jComboBox_biotipo.setSelectedItem("Grande");
+                }
+            }
+
+            impresion = dfor.format(biotipo);
+            System.out.println(talla);
+            System.out.println(cia_muñeca);
+            System.out.println("el biotipo es: " + impresion);
+
+        }
+
+    }
+
+    public void calcularpesoideal() {
+        double altura = 0.0;
+        double peso_kg = 0.0;
+        double imcval_ = 0.0;
+        double pesoideal = 0.0;
+        double ppi = 0.0;
+        DecimalFormat dfe = new DecimalFormat("#.##");
+
+        altura = Double.parseDouble(txt_altura.getText());
+        peso_kg = Double.parseDouble(peso.getText());
+        if (this.sexocombo.getSelectedItem().equals("F")) {
+            imcval_ = 21.5;
+            pesoideal = imcval_ * (altura * altura);
+            ppi = ((peso_kg * 100.0) / pesoideal);
+            this.txt_pesoideal.setText(dfe.format(pesoideal));
+            this.txt_porcentaje_ppi.setText(dfe.format(ppi));
+        } else if (this.sexocombo.getSelectedItem().equals("M")) {
+            imcval_ = 22.5;
+            pesoideal = imcval_ * (altura * altura);
+            ppi = ((peso_kg * 100.0) / pesoideal);
+            this.txt_pesoideal.setText(dfe.format(pesoideal));
+            this.txt_porcentaje_ppi.setText(dfe.format(ppi));
+        }
+
+    }
 }
